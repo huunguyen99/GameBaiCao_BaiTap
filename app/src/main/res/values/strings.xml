@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Game Bài Cào</string>
+    <string name="tab_text_1">Tính Điểm</string>
+    <string name="tab_text_2">Máy với Máy</string>
+    <string name="tab_text_3">Người với Máy</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
