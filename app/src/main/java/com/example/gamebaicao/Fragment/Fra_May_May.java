@@ -30,8 +30,8 @@ public class Fra_May_May extends Fragment {
     private int soVanCon = 20;
 
     private int mangDiemThuTu[] = {
-            1,5,9,13,17,21,25,29,33,37,41,45,49,2,6,10,14,18,22,26,30,34,38,42,46,50,3,7,11,15,19,23,27,
-            31,35,39,43,47,51,4,8,12,16,20,24,28,32,36,40,44,48,52
+            49,1,5,9,13,17,21,25,29,33,37,41,45,50,2,6,10,14,18,22,26,30,34,38,42,46,51,3,7,11,15,19,23,
+            27,31,35,39,43,47,52,4,8,12,16,20,24,28,32,36,40,44,48
     };
 
     private int mangHinhBaiCo[] = {
@@ -62,18 +62,14 @@ public class Fra_May_May extends Fragment {
 
         ConnectView();
         setDuLieuBai();
+
         imgButtonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CountDownTimer(20000, 1000)
+                new CountDownTimer(60000, 3000)
                 {
                     public void onTick(long millisUntilFinished){
-                        if(tongDiemMay1 > 10 || tongDiemMay2 > 10)
-                        {
-                            onFinish();
-                        }
-                        else
-                            chiaBai();
+                        chiaBai();
                     }
                     public  void onFinish(){
                         Snackbar.make(getView(), "Đã xong", Snackbar.LENGTH_LONG).show();
@@ -226,6 +222,7 @@ public class Fra_May_May extends Fragment {
                         if(Ktra3LaTrungCua_May1 > Ktra3LaTrungCua_May2)
                         {
                             tongDiemMay1 += 1;
+                            Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
                         }
                         else
                         {
@@ -239,12 +236,14 @@ public class Fra_May_May extends Fragment {
                         {
                             txtDiemMay2.setText("Máy 2: Ba lá hình");
                             tongDiemMay1 += 1;
+                            Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
                         }
                         else
                         {
                             int diem_May2 = TinhDiem(baiMay2_1, baiMay2_2, baiMay2_3);
                             txtDiemMay2.setText("Máy 2: " + diem_May2 + "điểm");
                             tongDiemMay1 += 1;
+                            Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -258,6 +257,7 @@ public class Fra_May_May extends Fragment {
                         if(Ktra3LaTrungCua_May1 > Ktra3LaTrungCua_May2)
                         {
                             tongDiemMay1 += 1;
+                            Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
                         }
                         else
                         {
@@ -284,19 +284,72 @@ public class Fra_May_May extends Fragment {
                 {
                     int Ktra3LaHinhCua_May1 = KiemTraBaHinh(baiMay1_1, baiMay1_2, baiMay1_3);
                     int Ktra3LaHinhCua_May2 = KiemTraBaHinh(baiMay2_1, baiMay2_2, baiMay2_3);
+
+                    //Kiểm tra bài đôi
+
+                    int KtraBaiDoiCua_May1 = KiemTraBaiDoi(baiMay1_1, baiMay1_2, baiMay1_3);
+                    int KtraBaiDoiCua_May2 = KiemTraBaiDoi(baiMay2_1, baiMay2_2, baiMay2_3);
+
                     if(Ktra3LaHinhCua_May1 != -1)
                     {
                         txtDiemMay1.setText("Máy 1: Ba lá hình");
                         if(Ktra3LaHinhCua_May2 != -1)
                         {
                             txtDiemMay2.setText("Máy 2: Ba lá hình");
-                            if(Ktra3LaHinhCua_May1 > Ktra3LaHinhCua_May2)
+                            if(KtraBaiDoiCua_May1 != -1)
                             {
-                                tongDiemMay1 += 1;
+                                if(KtraBaiDoiCua_May2 != -1)
+                                {
+                                    if(KtraBaiDoiCua_May1 > KtraBaiDoiCua_May2)
+                                    {
+                                        tongDiemMay1 += 1;
+                                        Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        tongDiemMay2 += 1;
+                                        Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                }
+                                else
+                                {
+                                    tongDiemMay1 += 1;
+                                    Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                }
+                            }
+                            else if(KtraBaiDoiCua_May2 != -1)
+                            {
+                                if(KtraBaiDoiCua_May1 != -1)
+                                {
+                                    if(KtraBaiDoiCua_May1 > KtraBaiDoiCua_May2)
+                                    {
+                                        tongDiemMay1 += 1;
+                                        Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        tongDiemMay2 += 1;
+                                        Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                }
+                                else
+                                {
+                                    tongDiemMay2 += 1;
+                                    Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                }
                             }
                             else
                             {
-                                tongDiemMay2 += 1;
+                                if(Ktra3LaHinhCua_May1 > Ktra3LaHinhCua_May2)
+                                {
+                                    tongDiemMay1 += 1;
+                                    Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    tongDiemMay2 += 1;
+                                    Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                }
                             }
                         }
                         else
@@ -304,6 +357,7 @@ public class Fra_May_May extends Fragment {
                             int diem_May2 = TinhDiem(baiMay2_1, baiMay2_2, baiMay2_3);
                             txtDiemMay2.setText("Máy 2: " + diem_May2 + "điểm");
                             tongDiemMay1 += 1;
+                            Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
                         }
                     }
                     else if(Ktra3LaHinhCua_May2 != -1)
@@ -312,13 +366,60 @@ public class Fra_May_May extends Fragment {
                         if(Ktra3LaHinhCua_May1 != -1)
                         {
                             txtDiemMay1.setText("Máy 1: Ba lá hình");
-                            if(Ktra3LaHinhCua_May1 > Ktra3LaHinhCua_May2)
+                            if(KtraBaiDoiCua_May1 != -1)
                             {
-                                tongDiemMay1 += 1;
+                                if(KtraBaiDoiCua_May2 != -1)
+                                {
+                                    if(KtraBaiDoiCua_May1 > KtraBaiDoiCua_May2)
+                                    {
+                                        tongDiemMay1 += 1;
+                                        Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        tongDiemMay2 += 1;
+                                        Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                }
+                                else
+                                {
+                                    tongDiemMay1 += 1;
+                                    Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                }
+                            }
+                            else if(KtraBaiDoiCua_May2 != -1)
+                            {
+                                if(KtraBaiDoiCua_May1 != -1)
+                                {
+                                    if(KtraBaiDoiCua_May1 > KtraBaiDoiCua_May2)
+                                    {
+                                        tongDiemMay1 += 1;
+                                        Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        tongDiemMay2 += 1;
+                                        Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                }
+                                else
+                                {
+                                    tongDiemMay2 += 1;
+                                    Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                }
                             }
                             else
                             {
-                                tongDiemMay2 += 1;
+                                if(Ktra3LaHinhCua_May1 > Ktra3LaHinhCua_May2)
+                                {
+                                    tongDiemMay1 += 1;
+                                    Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    tongDiemMay2 += 1;
+                                    Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                }
                             }
                         }
                         else
@@ -326,6 +427,7 @@ public class Fra_May_May extends Fragment {
                             int diem_May1 = TinhDiem(baiMay1_1, baiMay1_2, baiMay1_3);
                             txtDiemMay1.setText("Máy 1: " + diem_May1 + "điểm");
                             tongDiemMay2 += 1;
+                            Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
                         }
                     }
                     else
@@ -335,56 +437,79 @@ public class Fra_May_May extends Fragment {
                         txtDiemMay1.setText("Máy 1: " + diem_May1 + "điểm");
                         txtDiemMay2.setText("Máy 2: " + diem_May2 + "điểm");
                         if(diem_May1 > diem_May2)
+                        {
                             tongDiemMay1 += 1;
+                            Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                        }
                         else if(diem_May2 > diem_May1)
+                        {
                             tongDiemMay2 += 1;
+                            Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                        }
                         else
                         {
                             int LaBaiCaoNhatCua_May1 = LayLaBaiCaoNhat(baiMay1_1, baiMay1_2, baiMay1_3);
                             int LaBaiCaoNhatCua_May2 = LayLaBaiCaoNhat(baiMay2_1, baiMay2_2, baiMay2_3);
-                            System.out.println("lá bài cao nhất của Máy" + LaBaiCaoNhatCua_May2);
-                            System.out.println("lá bài cao nhất của Người" + LaBaiCaoNhatCua_May1);
-                            if(LaBaiCaoNhatCua_May2 > LaBaiCaoNhatCua_May1)
-                                tongDiemMay2 += 1;
+
+                            if(KtraBaiDoiCua_May1 != -1)
+                            {
+                                if(KtraBaiDoiCua_May2 != -1)
+                                {
+                                    if(KtraBaiDoiCua_May1 > KtraBaiDoiCua_May2)
+                                    {
+                                        tongDiemMay1 += 1;
+                                        Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        tongDiemMay2 += 1;
+                                        Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                }
+                                else
+                                {
+                                    tongDiemMay1 += 1;
+                                    Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                }
+                            }
+                            else if(KtraBaiDoiCua_May2 != -1)
+                            {
+                                if(KtraBaiDoiCua_May1 != -1)
+                                {
+                                    if(KtraBaiDoiCua_May1 > KtraBaiDoiCua_May2)
+                                    {
+                                        tongDiemMay1 += 1;
+                                        Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        tongDiemMay2 += 1;
+                                        Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                    }
+                                }
+                                else
+                                {
+                                    tongDiemMay2 += 1;
+                                    Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                }
+                            }
                             else
-                                tongDiemMay1 += 1;
+                            {
+                                if (LaBaiCaoNhatCua_May2 > LaBaiCaoNhatCua_May1)
+                                {
+                                    tongDiemMay2 += 1;
+                                    Snackbar.make(getView(), "Máy 2 thắng", Snackbar.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    tongDiemMay1 += 1;Snackbar.make(getView(), "Máy 1 thắng", Snackbar.LENGTH_LONG).show();
+                                }
+                            }
                         }
                     }
                 }
                 txtKetQua.setText("Kết Quả: \t\t\t\tMáy 1: " + tongDiemMay1 + "\t\t|\t\t Máy 2: " + tongDiemMay2);
-                if(tongDiemMay1 > 10 || tongDiemMay2 > 10)
-                {
-                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                    alertDialog.setTitle("Kết Quả");
-                    if(tongDiemMay1 > tongDiemMay2)
-                        alertDialog.setMessage("Tổng điểm Máy 1: " + tongDiemMay1 + "\nTổng điểm Máy 2: " + tongDiemMay2 + "\nKết luận: Máy 1 thắng");
-                    else if(tongDiemMay2 > tongDiemMay1)
-                        alertDialog.setMessage("Tổng điểm Máy 1: " + tongDiemMay1 + "\nTổng điểm Máy 2: " + tongDiemMay2 + "\nKết luận: Máy 2 thắng");
-                    alertDialog.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            tongDiemMay2 = 0;
-                            tongDiemMay1 = 0;
-                            soVan = 0;
-                            soVanCon = 20;
-                            txtDiemMay2.setText("Máy 2: ");
-                            txtDiemMay1.setText("Máy 1: ");
-                            txtKetQua.setText("Kết Quả: \t\t\t\tMáy 1: 0 \t\t|\t\t Máy 2: 0");
-                            txtSoVanCon.setText("Còn 20 ván");
-                            imgMay2_1.setImageResource(R.drawable.anhbaiup);
-                            imgMay2_2.setImageResource(R.drawable.anhbaiup);
-                            imgMay2_3.setImageResource(R.drawable.anhbaiup);
-                            imgMay1_1.setImageResource(R.drawable.anhbaiup);
-                            imgMay1_2.setImageResource(R.drawable.anhbaiup);
-                            imgMay1_3.setImageResource(R.drawable.anhbaiup);
-                            AlertDialog dialog = alertDialog.create();
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog dialog = alertDialog.create();
-                    dialog.show();
-                }
-                else if(soVan == 20)
+                if(soVan == 20)
                 {
                     final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                     alertDialog.setTitle("Kết Quả");
@@ -464,6 +589,36 @@ public class Fra_May_May extends Fragment {
                     int max1_2 = Math.max(diemBai1, diemBai2);
                     int max = Math.max(max1_2, diemBai3);
                     return max;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int KiemTraBaiDoi(LaBai bai1, LaBai bai2, LaBai bai3)
+    {
+        int id1 = bai1.getId(), id2 = bai2.getId(), id3 = bai3.getId();
+        int ktra1 = id1 - id2;
+        if(Math.abs(ktra1) == 13 || Math.abs(ktra1) == 26 || Math.abs(ktra1) == 39)
+        {
+            int max1_2 = Math.max(bai1.getDiem(), bai2.getDiem());
+            return max1_2;
+        }
+        else
+        {
+            int ktra2 = id1 - id3;
+            if(Math.abs(ktra2) == 13 || Math.abs(ktra2) == 26 || Math.abs(ktra2) == 39)
+            {
+                int max1_3 = Math.max(bai1.getDiem(), bai3.getDiem());
+                return max1_3;
+            }
+            else
+            {
+                int ktra3 = id2 - id3;
+                if(Math.abs(ktra3) == 13 || Math.abs(ktra3) == 26 || Math.abs(ktra3) == 39)
+                {
+                    int max2_3 = Math.max(bai2.getDiem(), bai3.getDiem());
+                    return max2_3;
                 }
             }
         }

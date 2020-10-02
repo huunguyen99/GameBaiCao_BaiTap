@@ -45,4 +45,7 @@ public class LaBai {
         this.hinh = hinh;
         this.diem = diem;
     }
+
+    public LaBai() {
+    }
 }

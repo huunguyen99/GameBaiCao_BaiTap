@@ -2,9 +2,11 @@ package com.example.gamebaicao.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +61,21 @@ public class Fra_TinhDiem extends Fragment {
         btnRutBai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chiaBai();
+                new CountDownTimer(3000, 3000)
+                {
+                    @Override
+                    public void onTick(long l) {
+                        chiaBai();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        laBai[0].setImageResource(R.drawable.anhbaiup);
+                        laBai[1].setImageResource(R.drawable.anhbaiup);
+                        laBai[2].setImageResource(R.drawable.anhbaiup);
+                    }
+                }.start();
+
             }
         });
         return view;
